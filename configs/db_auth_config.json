@@ -1,0 +1,15 @@
+{
+    "DB_NAME" : "Soc_net_publics",
+    "USER": "root",
+    "PATH_TO_PASSWORD": "/home/houdini/private/mySqlPassw.json",
+    "HOST":"localhost",
+    "PORT":3306,
+    "Mode": "Release",
+    "PathToCreds": "/home/houdini/ssl_nginx/soc_net_aut_proxy.crt",
+    "PEM_crt": "/home/houdini/ssl_nginx/soc_net_aut_proxy.pem",
+    "PEM_key": "/home/houdini/ssl_nginx/soc_net_aut_proxy_key.pem",
+    "pg_user":"postgres",
+    "pathToPassword":"/home/houdini/private/pgPass.json",
+    "db_name":"soc_net_auth_3c",
+    "host": "127.0.0.1"
+}

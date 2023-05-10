@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>METANIT.COM</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div id="message"></div>
+     <p>
+        Введите jwt: <br /> 
+        <input name="jwt" id="jwt" />
+    </p>
+     <p>
+        Введите email: <br /> 
+        <input name="email" id="email" />
+    </p>
+     <p>
+        Введите текст: <br /> 
+        <input name="text" id="text"/>
+    </p>
+    <button onclick="send()">Отправить</button>
+    <button onclick="get_chat()">Получить чат</button>
+<script>
+        async function get_chat(){
+     
+            // получаем введеные в поля имя и возраст
+            const jwt = document.getElementById("jwt").value;
+            email = document.getElementById("email").value;
+            // отправляем запрос
+            const response = await fetch("/get_chat", {
+                    method: "POST",
+                    headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                    body: JSON.stringify({ 
+                        jwt: jwt,
+                        friend_email: email
+                    })
+                });
+                const status= await response.status;
+                if(status == 204){
+                    document.getElementById("message").textContent = "Not found"
+                }
+                else{
+                    const data = await response.json()
+                    if (response.ok) { 
+                        document.getElementById("message").textContent = data.rows;
+                    }
+                    else
+                    {
+                        document.getElementById("message").textContent = data.error;
+                    }
+                }
+                
+        }
+</script>
+<script>
+    async function send(){
+ 
+        // получаем введеные в поля имя и возраст
+        const jwt = document.getElementById("jwt").value;
+        email = document.getElementById("email").value;
+        text = document.getElementById("text").value;
+
+        // отправляем запрос
+        const response = await fetch("/send", {
+                method: "POST",
+                headers: { "Accept": "application/json", "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    jwt: jwt,
+                    friend_email: email,
+                    text_data: text
+                })
+            });
+            const status= await response.status;
+                if(status == 204){
+                    document.getElementById("message").textContent = "Not found"
+                }
+                else{
+                    const data = await response.json()
+                    if (response.ok) { 
+                        document.getElementById("message").textContent = data.nextToken;
+                    }
+                    else
+                    {
+                        document.getElementById("message").textContent = data.error;
+                    }
+                }
+    }
+</script>
+</body>
+</html>
